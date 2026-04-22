@@ -12,7 +12,7 @@ tokio = { workspace = true }
 tracing = "0.1"
 k256 = "0.13.3"
 elliptic-curve = "0.13.0"
-rand = "0.8.5"
+rand = "0.10.1"
 
 [build-dependencies]
 sp1-build = { workspace = true }

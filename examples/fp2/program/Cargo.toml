@@ -7,4 +7,4 @@ publish = false
 [dependencies]
 sp1-zkvm = { workspace = true }
 num-bigint = "0.4.3"
-rand = "0.8.5"
+rand = "0.10.1"

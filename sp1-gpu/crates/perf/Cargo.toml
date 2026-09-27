@@ -40,7 +40,7 @@ either = { version = "1.8.0", features = ["serde"] }
 
 # telemetry
 opentelemetry = "^0.23.0"
-opentelemetry_sdk = { version = "^0.23.0", features = [
+opentelemetry_sdk = { version = "^0.26.0", features = [
     "trace",
     "rt-tokio",
     "logs_level_enabled",

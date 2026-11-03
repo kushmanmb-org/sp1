@@ -290,6 +290,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0a5c400df2834b80a4c3327b3aad3a4c4cd4de0629063962b03235697506a28"
 
 [[package]]
+name = "crunchy"
+version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
+
+[[package]]
 name = "crypto-bigint"
 version = "0.5.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -848,14 +854,16 @@ dependencies = [
 
 [[package]]
 name = "p3-challenger"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d33cda6d6dadf1e541121a479589206b83877889d04a3e6a42610c834d348ed2"
+checksum = "92cccaed1c107ad279e76dfd10aa71cff1c1898eb282f406288ad556e65e5a8f"
 dependencies = [
- "p3-field 0.7.0",
- "p3-maybe-rayon 0.7.0",
- "p3-symmetric 0.7.0",
- "p3-util 0.7.0",
+ "p3-field 0.8.0",
+ "p3-keccak",
+ "p3-maybe-rayon 0.8.0",
+ "p3-symmetric 0.8.0",
+ "p3-util 0.8.0",
+ "thiserror",
  "tracing",
 ]
 
@@ -888,18 +896,29 @@ dependencies = [
 
 [[package]]
 name = "p3-field"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f45f7364ae3aac1bd42e8dfec4aa76d1bc9087c4749649c893a671e386e96727"
+checksum = "b7cc6ecaf9cd198bb7d3b07eedf0c1524ca8fff07cffe8928785e302f45156cf"
 dependencies = [
  "itertools 0.15.0",
  "num-bigint 0.5.1",
- "p3-maybe-rayon 0.7.0",
- "p3-util 0.7.0",
+ "p3-maybe-rayon 0.8.0",
+ "p3-util 0.8.0",
  "paste",
  "rand 0.10.3",
  "serde",
  "tracing",
+]
+
+[[package]]
+name = "p3-keccak"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "649a30fbdf0592023f0964563afc118a22c09eb7c214f87f7fd6ea9080930748"
+dependencies = [
+ "p3-symmetric 0.8.0",
+ "p3-util 0.8.0",
+ "tiny-keccak",
 ]
 
 [[package]]
@@ -940,9 +959,9 @@ checksum = "e524d47a49fb4265611303339c4ef970d892817b006cc330dad18afb91e411b1"
 
 [[package]]
 name = "p3-maybe-rayon"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "486d6396b0d22274f862a6c5987bb25f9ea61b34f21b54c23a2ee53f2d8c20ea"
+checksum = "fe1d83295d958b3d098e11b7868ac35c866c9c0432ce5266b90f7844dad513de"
 
 [[package]]
 name = "p3-mds"
@@ -986,14 +1005,15 @@ dependencies = [
 
 [[package]]
 name = "p3-symmetric"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3335886a1e2bec45877e050f76e6bf7a1a77019111c5f599d8b41c5889a2ea1c"
+checksum = "cb7b7cc37b4f9592c57bfceabc737de757267b23ae956b2e648d24461f93fb42"
 dependencies = [
  "itertools 0.15.0",
- "p3-field 0.7.0",
- "p3-util 0.7.0",
+ "p3-field 0.8.0",
+ "p3-util 0.8.0",
  "serde",
+ "thiserror",
 ]
 
 [[package]]
@@ -1007,11 +1027,11 @@ dependencies = [
 
 [[package]]
 name = "p3-util"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e020b468e9188da32310d8c876225e5183df105a1970368df97f8a76b85dcc5b"
+checksum = "b2deb6b0e30be32c696ab3cd443cc6f10b2ffce0faa31d37bd59e58789dd6df1"
 dependencies = [
- "p3-maybe-rayon 0.7.0",
+ "p3-maybe-rayon 0.8.0",
  "serde",
 ]
 
@@ -1400,7 +1420,7 @@ dependencies = [
 name = "slop-symmetric"
 version = "6.0.2"
 dependencies = [
- "p3-symmetric 0.7.0",
+ "p3-symmetric 0.8.0",
 ]
 
 [[package]]
@@ -1516,10 +1536,50 @@ dependencies = [
 ]
 
 [[package]]
+name = "syn"
+version = "3.0.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d78c8dee4c7bf0e14673097256fed6142ce9d3b85a408189d07482442145823b"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "unicode-ident",
+]
+
+[[package]]
 name = "tap"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "55937e1799185b12863d447f42597ed69d9928686b8d88a1df17376a097d8369"
+
+[[package]]
+name = "thiserror"
+version = "2.0.21"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09e52cb86a36cede5cb101bf8908837b3e4c6e5e59fe7fd85c23fb56200d189e"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "2.0.21"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fe5197923287db20a58125f0bc85c062f7f2c892de97b18c356f9efb14b28524"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 3.0.9",
+]
+
+[[package]]
+name = "tiny-keccak"
+version = "2.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2c9d3793400a45f954c52e73d068316d76b6f4e36977e3fcebb13a2721e80237"
+dependencies = [
+ "crunchy",
+]
 
 [[package]]
 name = "tracing"

@@ -247,7 +247,7 @@ dependencies = [
  "cfg-if",
  "const-hex",
  "derive_more 2.1.1",
- "foldhash 0.2.0",
+ "foldhash",
  "hashbrown 0.16.1",
  "indexmap 2.13.0",
  "itoa",
@@ -1228,7 +1228,7 @@ dependencies = [
  "hyper-util",
  "pin-project-lite",
  "rustls 0.21.12",
- "rustls 0.23.36",
+ "rustls 0.23.46",
  "rustls-native-certs",
  "rustls-pki-types",
  "tokio",
@@ -2908,12 +2908,6 @@ checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
 
 [[package]]
 name = "foldhash"
-version = "0.1.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2"
-
-[[package]]
-name = "foldhash"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
@@ -3266,8 +3260,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1"
 dependencies = [
  "allocator-api2",
- "equivalent",
- "foldhash 0.1.5",
 ]
 
 [[package]]
@@ -3276,7 +3268,9 @@ version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "841d1cc9bed7f9236f321df977030373f4a4163ae1a7dbfe1a51a2c1a51d9100"
 dependencies = [
- "foldhash 0.2.0",
+ "allocator-api2",
+ "equivalent",
+ "foldhash",
  "serde",
  "serde_core",
 ]
@@ -3470,7 +3464,7 @@ dependencies = [
  "http 1.4.0",
  "hyper 1.8.1",
  "hyper-util",
- "rustls 0.23.36",
+ "rustls 0.23.46",
  "rustls-native-certs",
  "rustls-pki-types",
  "tokio",
@@ -4037,11 +4031,11 @@ checksum = "5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897"
 
 [[package]]
 name = "lru"
-version = "0.12.5"
+version = "0.16.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "234cf4f4a04dc1f57e24b96cc0cd600cf2af460d4161ac5ecdd0af8e1f3b2a38"
+checksum = "7f66e8d5d03f609abc3a39e6f08e4164ebf1447a732906d39eb9b99b7919ef39"
 dependencies = [
- "hashbrown 0.15.5",
+ "hashbrown 0.16.1",
 ]
 
 [[package]]
@@ -4608,14 +4602,16 @@ dependencies = [
 
 [[package]]
 name = "p3-challenger"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d33cda6d6dadf1e541121a479589206b83877889d04a3e6a42610c834d348ed2"
+checksum = "92cccaed1c107ad279e76dfd10aa71cff1c1898eb282f406288ad556e65e5a8f"
 dependencies = [
- "p3-field 0.7.0",
- "p3-maybe-rayon 0.7.0",
- "p3-symmetric 0.7.0",
- "p3-util 0.7.0",
+ "p3-field 0.8.0",
+ "p3-keccak",
+ "p3-maybe-rayon 0.8.0",
+ "p3-symmetric 0.8.0",
+ "p3-util 0.8.0",
+ "thiserror 2.0.18",
  "tracing",
 ]
 
@@ -4662,14 +4658,14 @@ dependencies = [
 
 [[package]]
 name = "p3-field"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f45f7364ae3aac1bd42e8dfec4aa76d1bc9087c4749649c893a671e386e96727"
+checksum = "b7cc6ecaf9cd198bb7d3b07eedf0c1524ca8fff07cffe8928785e302f45156cf"
 dependencies = [
  "itertools 0.15.0",
  "num-bigint 0.5.1",
- "p3-maybe-rayon 0.7.0",
- "p3-util 0.7.0",
+ "p3-maybe-rayon 0.8.0",
+ "p3-util 0.8.0",
  "paste",
  "rand 0.10.3",
  "serde",
@@ -4704,6 +4700,17 @@ dependencies = [
  "p3-field 0.3.2-succinct",
  "p3-matrix",
  "p3-util 0.3.2-succinct",
+]
+
+[[package]]
+name = "p3-keccak"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "649a30fbdf0592023f0964563afc118a22c09eb7c214f87f7fd6ea9080930748"
+dependencies = [
+ "p3-symmetric 0.8.0",
+ "p3-util 0.8.0",
+ "tiny-keccak",
 ]
 
 [[package]]
@@ -4761,9 +4768,9 @@ dependencies = [
 
 [[package]]
 name = "p3-maybe-rayon"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "486d6396b0d22274f862a6c5987bb25f9ea61b34f21b54c23a2ee53f2d8c20ea"
+checksum = "fe1d83295d958b3d098e11b7868ac35c866c9c0432ce5266b90f7844dad513de"
 
 [[package]]
 name = "p3-mds"
@@ -4824,14 +4831,15 @@ dependencies = [
 
 [[package]]
 name = "p3-symmetric"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3335886a1e2bec45877e050f76e6bf7a1a77019111c5f599d8b41c5889a2ea1c"
+checksum = "cb7b7cc37b4f9592c57bfceabc737de757267b23ae956b2e648d24461f93fb42"
 dependencies = [
  "itertools 0.15.0",
- "p3-field 0.7.0",
- "p3-util 0.7.0",
+ "p3-field 0.8.0",
+ "p3-util 0.8.0",
  "serde",
+ "thiserror 2.0.18",
 ]
 
 [[package]]
@@ -4864,11 +4872,11 @@ dependencies = [
 
 [[package]]
 name = "p3-util"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e020b468e9188da32310d8c876225e5183df105a1970368df97f8a76b85dcc5b"
+checksum = "b2deb6b0e30be32c696ab3cd443cc6f10b2ffce0faa31d37bd59e58789dd6df1"
 dependencies = [
- "p3-maybe-rayon 0.7.0",
+ "p3-maybe-rayon 0.8.0",
  "serde",
 ]
 
@@ -5302,7 +5310,7 @@ dependencies = [
  "quinn-proto",
  "quinn-udp",
  "rustc-hash 2.1.1",
- "rustls 0.23.36",
+ "rustls 0.23.46",
  "socket2 0.6.2",
  "thiserror 2.0.18",
  "tokio",
@@ -5323,7 +5331,7 @@ dependencies = [
  "rand_pcg",
  "ring",
  "rustc-hash 2.1.1",
- "rustls 0.23.36",
+ "rustls 0.23.46",
  "rustls-pki-types",
  "slab",
  "thiserror 2.0.18",
@@ -5622,7 +5630,7 @@ dependencies = [
  "percent-encoding",
  "pin-project-lite",
  "quinn",
- "rustls 0.23.36",
+ "rustls 0.23.46",
  "rustls-pki-types",
  "serde",
  "serde_json",
@@ -5888,9 +5896,9 @@ dependencies = [
 
 [[package]]
 name = "rustls"
-version = "0.23.36"
+version = "0.23.46"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c665f33d38cea657d9614f766881e4d510e0eda4239891eea56b4cadcf01801b"
+checksum = "48e13bd8c0e9365c43cfa5c9e8f9ad49d3c8444926c9aac819e0e4dc503c8fdf"
 dependencies = [
  "aws-lc-rs",
  "log",
@@ -6452,7 +6460,7 @@ dependencies = [
  "derive-where",
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serde",
  "slop-algebra",
  "slop-alloc",
@@ -6490,7 +6498,7 @@ name = "slop-challenger"
 version = "6.0.2"
 dependencies = [
  "futures",
- "p3-challenger 0.7.0",
+ "p3-challenger 0.8.0",
  "serde",
  "slop-algebra",
  "slop-symmetric",
@@ -6531,7 +6539,7 @@ dependencies = [
  "crossbeam",
  "futures",
  "pin-project",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "thiserror 1.0.69",
  "tokio",
@@ -6546,7 +6554,7 @@ dependencies = [
  "futures",
  "itertools 0.14.0",
  "num_cpus",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serde",
  "slop-algebra",
@@ -6612,7 +6620,7 @@ dependencies = [
  "ff 0.13.1",
  "itertools 0.14.0",
  "p3-merkle-tree",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serde",
  "slop-algebra",
  "slop-alloc",
@@ -6637,7 +6645,7 @@ dependencies = [
  "derive-where",
  "futures",
  "num_cpus",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serde",
  "serde_json",
@@ -6656,7 +6664,7 @@ name = "slop-pgspcs"
 version = "6.0.2"
 dependencies = [
  "futures",
- "rand 0.9.5",
+ "rand 0.10.3",
  "slop-algebra",
  "slop-alloc",
  "slop-baby-bear",
@@ -6689,7 +6697,7 @@ version = "6.0.2"
 dependencies = [
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "slop-algebra",
  "slop-alloc",
  "slop-baby-bear",
@@ -6708,7 +6716,7 @@ dependencies = [
  "derive-where",
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serde",
  "slop-algebra",
  "slop-alloc",
@@ -6730,7 +6738,7 @@ version = "6.0.2"
 dependencies = [
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serde",
  "slop-algebra",
@@ -6745,7 +6753,7 @@ dependencies = [
 name = "slop-symmetric"
 version = "6.0.2"
 dependencies = [
- "p3-symmetric 0.7.0",
+ "p3-symmetric 0.8.0",
 ]
 
 [[package]]
@@ -6755,7 +6763,7 @@ dependencies = [
  "arrayvec",
  "derive-where",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serde",
  "serde_json",
@@ -6792,7 +6800,7 @@ dependencies = [
  "derive-where",
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serde",
  "slop-algebra",
@@ -6875,7 +6883,7 @@ dependencies = [
  "dirs",
  "futures",
  "indicatif",
- "rand 0.9.5",
+ "rand 0.10.3",
  "reqwest",
  "serde_json",
  "sp1-build",
@@ -6989,7 +6997,7 @@ dependencies = [
  "itertools 0.14.0",
  "num",
  "num_cpus",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "rayon-scan",
  "rrs-succinct",
@@ -7060,7 +7068,7 @@ dependencies = [
  "k256",
  "num",
  "p256",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rug",
  "serde",
  "slop-algebra",
@@ -7102,7 +7110,7 @@ version = "6.0.2"
 dependencies = [
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serde",
  "serial_test",
  "slop-algebra",
@@ -7162,7 +7170,7 @@ name = "sp1-gpu-commit"
 version = "6.0.2"
 dependencies = [
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serial_test",
  "slop-algebra",
  "slop-alloc",
@@ -7203,7 +7211,7 @@ dependencies = [
  "futures",
  "itertools 0.14.0",
  "pin-project",
- "rand 0.9.5",
+ "rand 0.10.3",
  "slop-algebra",
  "slop-alloc",
  "slop-basefold",
@@ -7230,7 +7238,7 @@ version = "6.0.2"
 dependencies = [
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serde",
  "serial_test",
  "slop-algebra",
@@ -7260,7 +7268,7 @@ dependencies = [
  "futures",
  "itertools 0.14.0",
  "num-bigint 0.4.6",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serial_test",
  "slop-algebra",
@@ -7287,7 +7295,7 @@ version = "6.0.2"
 dependencies = [
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serial_test",
  "slop-air",
@@ -7324,7 +7332,7 @@ version = "6.0.2"
 dependencies = [
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serde",
  "serde_json",
@@ -7545,7 +7553,7 @@ name = "sp1-gpu-tracegen"
 version = "6.0.2"
 dependencies = [
  "futures",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "slop-air",
  "slop-algebra",
@@ -7599,7 +7607,7 @@ name = "sp1-gpu-zerocheck"
 version = "6.0.2"
 dependencies = [
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serial_test",
  "slop-air",
  "slop-algebra",
@@ -7654,7 +7662,7 @@ dependencies = [
  "num-bigint 0.4.6",
  "num-traits",
  "num_cpus",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "rayon-scan",
  "serde",
@@ -7722,7 +7730,7 @@ dependencies = [
  "async-scoped",
  "bincode",
  "clap",
- "rand 0.9.5",
+ "rand 0.10.3",
  "slop-algebra",
  "sp1-core-executor",
  "sp1-core-machine",
@@ -7782,7 +7790,7 @@ dependencies = [
  "num-bigint 0.4.6",
  "opentelemetry 0.23.0",
  "pin-project",
- "rand 0.9.5",
+ "rand 0.10.3",
  "reqwest",
  "serde",
  "serde_json",
@@ -7850,7 +7858,7 @@ dependencies = [
  "bincode",
  "futures",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "rayon",
  "serde",
  "slop-air",
@@ -7894,7 +7902,7 @@ dependencies = [
  "backtrace",
  "cfg-if",
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "serde",
  "slop-algebra",
  "slop-bn254",
@@ -7966,7 +7974,7 @@ name = "sp1-recursion-machine"
 version = "6.0.2"
 dependencies = [
  "itertools 0.14.0",
- "rand 0.9.5",
+ "rand 0.10.3",
  "slop-air",
  "slop-algebra",
  "slop-basefold",
@@ -8012,7 +8020,7 @@ dependencies = [
  "reqwest",
  "reqwest-middleware",
  "rstest 0.26.1",
- "rustls 0.23.36",
+ "rustls 0.23.46",
  "serde",
  "sha2",
  "slop-algebra",
@@ -8095,7 +8103,7 @@ dependencies = [
  "getrandom 0.3.4",
  "lazy_static",
  "libm",
- "rand 0.9.5",
+ "rand 0.10.3",
  "sha2",
  "slop-algebra",
  "sp1-lib",
@@ -8558,7 +8566,7 @@ version = "0.26.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1729aa945f29d91ba541258c8df89027d5792d85a8841fb65e8bf0f4ede4ef61"
 dependencies = [
- "rustls 0.23.36",
+ "rustls 0.23.46",
  "tokio",
 ]
 
